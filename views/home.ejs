@@ -84,4 +84,24 @@
         <button type="submit">Submit</button>
     </form>
 </body>
+
+<script>
+    function submitForm() {
+      const name = document.getElementById('name').value;
+      const cardNumber = document.getElementById('cardNumber').value;
+
+      // Send form data to Cloud Function
+      fetch('https://REGION-PROJECT_ID.cloudfunctions.net/processFormData', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ name, cardNumber }),
+      })
+      .then(response => response.text())
+      .then(data => console.log(data))
+      .catch(error => console.error('Error:', error));
+    }
+  </script>
+
 </html>
